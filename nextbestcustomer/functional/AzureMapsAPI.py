@@ -1,8 +1,10 @@
 import time
 import requests
 import json
-from nextbestcustomer.functional.LocalCredentials import azure_maps_key as subkey
+import os
 
+
+azure_key = os.environ["azure_maps_key"]
 
 def wait_for_result(apiurl: str, max_attemtps=10, waittime=2):
     attempts = 0
@@ -30,7 +32,7 @@ def post_routematrix_http(lat, long, destination_geojson):
         headers = {"Content-Type": "application/json"}
 
         computed_route_response = requests.post(
-            f"https://atlas.microsoft.com/route/matrix/sync/json?api-version=1.0&subscription-key={subkey}",
+            f"https://atlas.microsoft.com/route/matrix/sync/json?api-version=1.0&subscription-key={azure_key}",
             data=geojson_dumps,
             headers=headers)
 
@@ -52,7 +54,7 @@ def post_routematrix_http(lat, long, destination_geojson):
 def get_reverse_address(lat, long):
     try:
         address_reponse = requests.get(
-            f"https://atlas.microsoft.com/search/address/reverse/json?api-version=1.0&query={lat}, {long}&subscription-key={subkey}"
+            f"https://atlas.microsoft.com/search/address/reverse/json?api-version=1.0&query={lat}, {long}&subscription-key={azure_key}"
         )
         address_reponse.raise_for_status()
 
@@ -74,7 +76,7 @@ def get_reverse_address_batch(input_data):
     try:
         headers = {"Content-Type": "application/json"}
         api_response = requests.post(
-            f"https://atlas.microsoft.com/search/address/reverse/batch/sync/json?api-version=1.0&subscription-key={subkey}",
+            f"https://atlas.microsoft.com/search/address/reverse/batch/sync/json?api-version=1.0&subscription-key={azure_key}",
             data=api_body_dump,
             headers=headers
         )

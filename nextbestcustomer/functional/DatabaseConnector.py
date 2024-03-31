@@ -1,6 +1,5 @@
 
 from nextbestcustomer.functional.EntityHandler import EntityHandler
-from nextbestcustomer.functional.LocalCredentials import sql_connection_string as connection_string
 from nextbestcustomer.entities.User import User
 import pyodbc
 import os

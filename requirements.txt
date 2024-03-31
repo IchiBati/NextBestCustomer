@@ -1,0 +1,10 @@
+azure-functions==1.18.0
+certifi==2024.2.2
+charset-normalizer==3.3.2
+geojson==3.1.0
+idna==3.6
+logging==0.4.9.6
+pyodbc==5.1.0
+requests==2.31.0
+urllib3==2.2.1
+pyodbc

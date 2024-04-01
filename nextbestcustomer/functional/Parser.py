@@ -1,9 +1,9 @@
 from nextbestcustomer.entities.Customer import Customer
 from nextbestcustomer.entities.Route import Route
 from nextbestcustomer.entities.Location import Location
-import ApiDataFormatter
-import AzureMapsAPI
-import HttpTriggerWorkload
+from nextbestcustomer.functional import AzureMapsAPI
+from nextbestcustomer.functional.ApiDataFormatter import ApiDataFormatter
+from nextbestcustomer.functional.HttpTriggerWorkload import HttpTriggerWorkload
 
 
 class Parser:

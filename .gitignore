@@ -126,8 +126,6 @@ dmypy.json
 bin
 obj
 appsettings.json
-.vscode
-
 
 # Azurite artifacts
 __blobstorage__

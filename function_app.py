@@ -7,11 +7,13 @@ from nextbestcustomer.functional.EntityHandler import EntityHandler
 from nextbestcustomer.functional.RequestValidator import (
     InvalidQueryParameter,
     InvalidRequestBody,
-    RequestValidator,
+    RequestValidator
 )
 from nextbestcustomer.functional.HttpTriggerWorkload import HttpTriggerWorkload
+from nextbestcustomer.functional import ErrorHandler
 from nextbestcustomer.functional.Parser import Parser
 from nextbestcustomer.entities.User import User
+from nextbestcustomer.functional import AzureMapsAPI
 import os
 
 
@@ -50,6 +52,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     except pyodbc.Error as ex:
         return func.HttpResponse(ex.args[1], status_code=500)
 
+    poly = AzureMapsAPI.get_route_range_poly(user_lat, user_long, 10000)
     payload = HttpTriggerWorkload(user_destinations, user_lat, user_long, user_mail)
     user = User(payload.query_mail, payload.query_lat, payload.query_long)
     database.insert_user(user=user)

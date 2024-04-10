@@ -19,10 +19,12 @@ def _get_formatter(target_format, input_data, input_lat=0, input_lon=0):
 def _format_to_geojson(input_data, input_lat, input_lon):
     geojson_template = {"origins": {}, "destinations": {}}
     multipoint_origin = geojson.MultiPoint([(float(input_lon), float(input_lat))])
-    destination_coords = [(float(i['longitude']), float(i['latitude'])) for i in input_data]
+    destination_coords = [
+        (float(i["longitude"]), float(i["latitude"])) for i in input_data
+    ]
     multipoint_dest = geojson.MultiPoint(destination_coords)
-    geojson_template['origins'] = multipoint_origin
-    geojson_template['destinations'] = multipoint_dest
+    geojson_template["origins"] = multipoint_origin
+    geojson_template["destinations"] = multipoint_dest
     return geojson_template
 
 

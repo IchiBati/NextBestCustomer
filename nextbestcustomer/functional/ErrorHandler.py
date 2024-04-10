@@ -1,15 +1,14 @@
 import sys
 import azure.functions as func
 
-catchable_exceptions = [BaseException, Exception]
-
-#def own_except_hook(exctype, value, traceback):
-  
 
 
-#def get_handler(raised_exc: Exception):
-        
+def own_except_hook(exc_type, exc_value, exc_traceback):
+    
+    if issubclass(exc_type, KeyboardInterrupt):
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+        return
+    
+    return func.HttpResponse(exc_value.args[0])
 
-
-
-
+sys.excepthook = own_except_hook
